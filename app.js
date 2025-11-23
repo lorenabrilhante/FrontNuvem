@@ -4,6 +4,7 @@ const updateProductForm = document.querySelector('#update-product-form');
 const updateProductId = document.querySelector('#update-id');
 const updateProductName = document.querySelector('#update-name');
 const updateProductPrice = document.querySelector('#update-price');
+const updateProductDescription = document.querySelector('#update-description');
 
 // Function to fetch all products from the server
 async function fetchProducts() {
@@ -34,6 +35,7 @@ async function fetchProducts() {
       updateProductId.value = product.id;
       updateProductName.value = product.name;
       updateProductPrice.value = product.price;
+      updateProductDescription.value = product.description;
     });
     li.appendChild(updateButton);
 
@@ -47,19 +49,68 @@ addProductForm.addEventListener('submit', async event => {
   event.preventDefault();
   const name = addProductForm.elements['name'].value;
   const price = addProductForm.elements['price'].value;
-  await addProduct(name, price);
+  const description = addProductForm.elements['description'].value;
+  await addProduct(name, price, description);
   addProductForm.reset();
   await fetchProducts();
 });
 
+// Event listener for Update Product form submit button
+
+updateProductForm.addEventListener('submit', async event => {
+  event.preventDefault();
+
+  const id = updateProductId.value;
+  const name = updateProductName.value;
+  const price = updateProductPrice.value;
+  const description = updateProductDescription.value;
+
+  await updateProduct(id, name, price, description);
+
+  updateProductForm.reset();
+  await fetchProducts();
+});
+// Function to update a product
+
+const getProductForm = document.querySelector('#get-product-form');
+const getProductId = document.querySelector('#get-id');
+const productResult = document.querySelector('#product-result');
+
+getProductForm.addEventListener('submit', async event => {
+  event.preventDefault();
+  
+  const id = getProductId.value;
+
+  const response = await fetch(`http://18.223.109.62:3000/products/${id}`);
+  const product = await response.json();
+
+  if (product.length === 0) {
+    productResult.innerHTML = `<p>Produto não encontrado!</p>`;
+  } else {
+    const p = product[0]; // Supabase retorna array
+    productResult.innerHTML = `
+      <p>ID: ${p.id}</p>
+      <p>Name: ${p.name}</p>
+      <p>Price: $${p.price}</p>
+      <p>Descrição: ${p.description}</p>
+    `;
+  }
+
+  getProductForm.reset();
+});
+
 // Function to add a new product
+<<<<<<< HEAD
 async function addProduct(name, price) {
+=======
+async function addProduct(name, price, description) {
+>>>>>>> eed6ef4 (Deixando o nosso front mais babilonico, girly vroom vroom)
   const response = await fetch('http://18.223.109.62:3000/products', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name, price })
+    body: JSON.stringify({ name, price, description})
   });
   return response.json();
 }
@@ -73,6 +124,18 @@ async function deleteProduct(id) {
     },
     //body: JSON.stringify({id})
   });
+  return response.json();
+}
+
+async function updateProduct(id, name, price, description) {
+  const response = await fetch(`http://18.223.109.62:3000/products/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, price, description })
+  });
+
   return response.json();
 }
 

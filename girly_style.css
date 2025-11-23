@@ -1,0 +1,159 @@
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f8c8dc, #e1c5f1);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    color: #4b2e83;
+    background-image: url('https://as2.ftcdn.net/jpg/01/34/69/53/1000_F_134695356_ETlB9eOEOj22eWT2EJvyzpFgA5yXn5Vs.jpg'); /* substitua pelo caminho da sua imagem */
+    background-repeat: repeat; 
+    background-size: auto; 
+    background-attachment: fixed;
+}
+
+/* Título principal */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Forms */
+form {
+    background: #fff0f8;
+    padding: 25px 20px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border: 2px solid #d8b6f0;
+}
+
+form h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #d87de0;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+    color: #a85cae;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 12px;
+    border: 2px solid #d8b6f0;
+    background-color: #fff0f8;
+    color: #4b2e83;
+    font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #ff8ed2;
+    box-shadow: 0 0 10px rgba(255, 142, 210, 0.5);
+}
+
+/* Buttons */
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #ff92c4, #d87de0);
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(216, 125, 224, 0.4);
+}
+
+/* Lista de produtos */
+ul#products {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 25px;
+}
+
+ul#products li {
+    background: #fff0f8;
+    border: 2px solid #d8b6f0;
+    border-radius: 15px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #4b2e83;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+
+ul#products li:hover {
+    transform: scale(1.02);
+}
+
+ul#products li button {
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin-left: 5px;
+    background: linear-gradient(135deg, #ff92c4, #d87de0);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+ul#products li button:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+/* Consulta por ID */
+#get-product-form {
+    background: #fff0f8;
+    padding: 25px 20px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+    border: 2px solid #d8b6f0;
+    margin-bottom: 20px;
+}
+
+#product-result {
+    background: #fff0f8;
+    border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+    max-width: 400px;
+    border: 2px solid #d8b6f0;
+    color: #4b2e83;
+    text-align: center;
+    font-weight: 600;
+}
