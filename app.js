@@ -64,12 +64,8 @@ async function addProduct(name, price, description) {
     if (!response.ok) {
       throw new Error(`Erro ao adicionar produto: ${response.status} - ${responseText}`);
     }
-    try {
-      return JSON.parse(responseText);
-    } catch (e) {
-      console.error('Resposta não é JSON:', responseText);
-      throw new Error(`Resposta inválida do servidor: ${responseText}`);
-    }
+    // Aceita resposta em texto puro (ex: "created!!")
+    return responseText;
   } catch (error) {
     throw error;
   }
