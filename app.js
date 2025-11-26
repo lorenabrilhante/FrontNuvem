@@ -52,15 +52,22 @@ async function fetchProducts() {
 // ADD PRODUCT (POST)
 // ================================
 async function addProduct(name, price, description) {
-  const response = await fetch('http://3.19.185.158:3000/products', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ name, price, description })
-  });
-
-  return response.json();
+  try {
+    const response = await fetch('http://3.19.185.158:3000/products', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name, price, description })
+    });
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Erro ao adicionar produto: ${response.status} - ${errorText}`);
+    }
+    return response.json();
+  } catch (error) {
+    throw error;
+  }
 }
 
 addProductForm.addEventListener('submit', async event => {
@@ -70,9 +77,14 @@ addProductForm.addEventListener('submit', async event => {
   const price = addProductForm.elements['price'].value;
   const description = addProductForm.elements['description'].value;
 
-  await addProduct(name, price, description);
-  addProductForm.reset();
-  await fetchProducts();
+  try {
+    await addProduct(name, price, description);
+    addProductForm.reset();
+    await fetchProducts();
+  } catch (error) {
+    alert(error.message);
+    console.error(error);
+  }
 });
 
 // ================================
